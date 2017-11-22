@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Article;
 use Auth;
-use DB;
 
 class ArticlesController extends Controller
 {
@@ -16,15 +15,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        $articles = Article::paginate(10);
-
-        //$articles=DB::table('articles')->get();
-
-        //$articles = Article ::whereLive(1)->get();
-        //$article=DB::table('articles')->whereLive(1)->first();
-        //dd($article);
-
-        return view('articles.index',compact('articles'));
+        //
     }
 
     /**
@@ -46,18 +37,18 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
         //return $request->all();
-
+        /*
         $article = new Article;
         $article->user_id = Auth::user()->id;
         $article->content = $request->content;
-        $article->live = $request->live;
+        $article->live = (boolean)$request->live;
         $article->post_on = $request->post_on;
 
         $article->save();
+        */
 
+      Article::create($request->all());
 
-      //Article::create($request->all());
-    //  DB::table('articles')->insert($request->except('_token'));
       /*  Article::create([
           'user_id'=>Auth::user()->id,
           'content'=> $request->content,
@@ -65,7 +56,6 @@ class ArticlesController extends Controller
           'post_on'=> $request->post_on
         ]);
         */
-        return redirect('/articles');
     }
 
     /**
@@ -76,8 +66,7 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-      $article = Article::findOrFail($id);
-      return view('articles.show',compact('article'));
+        //
     }
 
     /**
@@ -88,8 +77,7 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-      $article = Article::findOrFail($id);
-      return view('articles.edit',compact('article'));
+        //
     }
 
     /**
@@ -101,15 +89,7 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $article =Article::findOrFail($id);
-
-        if (!isset($request->live))
-          $article->update(array_merge($request->all(),['live'=> false]));
-        else
-          $article ->update($request->all());
-
-          return redirect('/articles');
+        //
     }
 
     /**
@@ -120,12 +100,6 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-         $article =Article::findOrFail($id);
-         $article->forceDelete();
-
-      //  Article::destroy($id);
-          return redirect('/articles');
+        //
     }
-
-
 }
