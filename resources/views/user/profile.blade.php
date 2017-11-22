@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 <style type="text/css">
   .profile-img {
     max-width: 150px;
